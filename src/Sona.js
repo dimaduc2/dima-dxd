@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Card, Image } from 'semantic-ui-react'
+import { Grid, Card, Image, Popup, Button } from 'semantic-ui-react'
 import axios from 'axios';
 
 class Sona extends Component {
@@ -15,12 +15,24 @@ class Sona extends Component {
     })
   }
 
+  xoa=(id)=>{
+    var r = window.confirm("Có xóa không?");
+    if(r === true){
+      axios.get('http://localhost:5100/dxd/Peerage/xoa/Sona?idMuonXoa=' + id)
+      // axios.get('http://localhost:5100/dxd/Peerage/xoa?idMuonXoa=' + id + '&tenCoCuaAiDo=Sona')
+      .then(response => {
+        this.setState({ketQuaSonaPeerage: response.data});
+      })
+    }
+  }
+
   render() {
     const { ketQuaSonaPeerage } = this.state
 
     return (
       <div className="SonaPeerage">
-        {/* {ketQuaSonaPeerage
+
+        {ketQuaSonaPeerage
           ?
             <Grid align='center'>
 
@@ -49,6 +61,8 @@ class Sona extends Component {
                   />
                   <br/>
                   King tên là {ketQuaSonaPeerage.King.name}
+                  <br/>
+                  <Button onClick={() => this.xoa(ketQuaSonaPeerage.King._id)}>X</Button>
                 </Grid.Column>
 
                 <Grid.Column>
@@ -75,6 +89,8 @@ class Sona extends Component {
                   />
                   <br/>
                   Queen tên là {ketQuaSonaPeerage.Queen.name}
+                  <br/>
+                  <Button onClick={() => this.xoa(ketQuaSonaPeerage.Queen._id)}>X</Button>
                 </Grid.Column>
               </Grid.Row>
 
@@ -104,6 +120,8 @@ class Sona extends Component {
                     />
                     <br/>
                     Bishop tên là {bishop.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(bishop._id)}>X</Button>
                     <br/>
                   </Grid.Column>
                 )}
@@ -135,6 +153,8 @@ class Sona extends Component {
                     />
                     <br/>
                     Knight tên là {knight.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(knight._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -165,6 +185,8 @@ class Sona extends Component {
                     />
                     <br/>
                     Rook tên là {rook.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(rook._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -195,6 +217,8 @@ class Sona extends Component {
                     />
                     <br/>
                     Pawn tên là {pawn.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(pawn._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -202,7 +226,7 @@ class Sona extends Component {
             </Grid>
                 
           : null
-        } */}
+        }
       </div>
     )
   }

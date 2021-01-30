@@ -15,11 +15,23 @@ class Rias extends Component {
     })
   }
 
+  xoa=(id)=>{
+    var r = window.confirm("Có xóa không?");
+    if(r === true){
+      axios.get('http://localhost:5100/dxd/Peerage/xoa/Rias?idMuonXoa=' + id)
+      // axios.get('http://localhost:5100/dxd/Peerage/xoa?idMuonXoa=' + id + '&tenCoCuaAiDo=Rias')
+      .then(response => {
+        this.setState({ketQuaRiasPeerage: response.data});
+      })
+    }
+  }
+
   render() {
     const { ketQuaRiasPeerage } = this.state
     
     return (
       <div className="RiasPeerage">
+
         {ketQuaRiasPeerage
           ?
             <Grid align='center'>
@@ -49,6 +61,8 @@ class Rias extends Component {
                   />
                   <br/>
                   King tên là {ketQuaRiasPeerage.King.name}
+                  <br/>
+                  <Button onClick={() => this.xoa(ketQuaRiasPeerage.King._id)}>X</Button>
                 </Grid.Column>
 
                 <Grid.Column>
@@ -75,6 +89,8 @@ class Rias extends Component {
                   />
                   <br/>
                   Queen tên là {ketQuaRiasPeerage.Queen.name}
+                  <br/>
+                  <Button onClick={() => this.xoa(ketQuaRiasPeerage.Queen._id)}>X</Button>
                 </Grid.Column>
               </Grid.Row>
 
@@ -105,6 +121,7 @@ class Rias extends Component {
                     <br/>
                     Bishop tên là {bishop.name}
                     <br/>
+                    <Button onClick={() => this.xoa(bishop._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -135,6 +152,8 @@ class Rias extends Component {
                     />
                     <br/>
                     Knight tên là {knight.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(knight._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -165,6 +184,8 @@ class Rias extends Component {
                     />
                     <br/>
                     Rook tên là {rook.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(rook._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -195,6 +216,8 @@ class Rias extends Component {
                     />
                     <br/>
                     Pawn tên là {pawn.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(pawn._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -208,6 +231,3 @@ class Rias extends Component {
   }
 }
 export default Rias;
-
-
-

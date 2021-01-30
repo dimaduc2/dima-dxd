@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Card, Image } from 'semantic-ui-react'
+import { Grid, Card, Image, Popup, Button } from 'semantic-ui-react'
 import axios from 'axios';
 
 class Issei extends Component {
@@ -15,12 +15,26 @@ class Issei extends Component {
     })
   }
 
+  xoa=(id)=>{
+    var r = window.confirm("Có xóa không?");
+    if(r === true){
+      axios.get('http://localhost:5100/dxd/Peerage/xoa/Issei?idMuonXoa=' + id)
+      // axios.get('http://localhost:5100/dxd/Peerage/xoa?idMuonXoa=' + id + '&tenCoCuaAiDo=Issei')
+      .then(response => {
+        this.setState({ketQuaIsseiPeerage: response.data});
+      })
+    }
+  }
+
+
+
   render() {
     const { ketQuaIsseiPeerage } = this.state
-    
+     
     return (
       <div className="IsseiPeerage">
-        {/* {ketQuaIsseiPeerage
+
+        {ketQuaIsseiPeerage
           ?
             <Grid align='center'>
 
@@ -49,6 +63,8 @@ class Issei extends Component {
                   />
                   <br/>
                   King tên là {ketQuaIsseiPeerage.King.name}
+                  <br/>
+                  <Button onClick={() => this.xoa(ketQuaIsseiPeerage.King._id)}>X</Button>
                 </Grid.Column>
 
                 <Grid.Column>
@@ -75,6 +91,8 @@ class Issei extends Component {
                   />
                   <br/>
                   Queen tên là {ketQuaIsseiPeerage.Queen.name}
+                  <br/>
+                  <Button onClick={() => this.xoa(ketQuaIsseiPeerage.Queen._id)}>X</Button>
                 </Grid.Column>
               </Grid.Row>
 
@@ -104,6 +122,8 @@ class Issei extends Component {
                     />
                     <br/>
                     Bishop tên là {bishop.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(bishop._id)}>X</Button>
                     <br/>
                   </Grid.Column>
                 )}
@@ -135,6 +155,8 @@ class Issei extends Component {
                     />
                     <br/>
                     Knight tên là {knight.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(knight._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -165,6 +187,8 @@ class Issei extends Component {
                     />
                     <br/>
                     Rook tên là {rook.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(rook._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -195,6 +219,8 @@ class Issei extends Component {
                     />
                     <br/>
                     Pawn tên là {pawn.name}
+                    <br/>
+                    <Button onClick={() => this.xoa(pawn._id)}>X</Button>
                   </Grid.Column>
                 )}
               </Grid.Row>
@@ -202,12 +228,9 @@ class Issei extends Component {
             </Grid>
                 
           : null
-        } */}
+        }
       </div>
     )
   }
 }
 export default Issei;
-
-
-

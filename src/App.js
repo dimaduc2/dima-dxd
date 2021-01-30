@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-
 import React, { Component } from 'react'
 
 import {Menu} from 'semantic-ui-react'
@@ -13,24 +11,18 @@ import Peerage from './Peerage'
 
 class App extends Component {
 
-
-  state = {
-    
-  }
-
+  state = {}
 
   chonMenu = (e, { name }) => {
     this.setState({ dangChonGi: name});
   }
-
 
   render() {
     return (
 
       <Router >
         <Menu>
-
-
+          
           <Menu.Item
             as={Link}
             to="/"
@@ -60,9 +52,6 @@ class App extends Component {
         <Route exact path = "/"  component = {Home} />
 
         <Route path = "/Peerage" render={() => <Peerage  />} />
-          
-      
-
       
       </Router>
     );
